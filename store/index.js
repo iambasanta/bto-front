@@ -1,10 +1,12 @@
 export const state = () => ({
-    isLoggedIn: false
+    isLoggedIn: false,
+    user: {}
 })
 
 export const mutations = {
-    setLogin(state) {
+    setLogin(state, payload) {
         state.isLoggedIn = true
+        state.user = payload
     },
 
     setLogout(state) {
@@ -13,11 +15,12 @@ export const mutations = {
 }
 
 export const actions = {
-    nuxtServerInit({ commit }, { req }) {
+    async nuxtServerInit({ commit }, { req }) {
         const token = this.$cookies.get('token')
 
         if (token) {
-            commit('setLogin')
+            const res = await this.$axios.$get('user/profile')
+            commit('setLogin', res.data)
         }
     }
 }

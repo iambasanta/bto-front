@@ -34,8 +34,11 @@ export default {
     computed:{
         isLoggedIn(){
                 return this.$store.state.isLoggedIn
-            }
         },
+        user(){
+            return this.$store.state.user
+        }
+    },
     methods:{
         logout(){
             this.$axios.$get('/user/logout')
