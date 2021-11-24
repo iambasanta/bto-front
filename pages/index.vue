@@ -95,6 +95,7 @@
 <script>
 import Nav from '~/components/layouts/Nav'
 export default {
+    middleware:'auth',
     components:{Nav}
 }
 </script>

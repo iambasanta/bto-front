@@ -34,6 +34,7 @@
 import ErrorField from '~/components/util/ErrorField'
 import Nav from '~/components/layouts/Nav'
 export default {
+    middleware:'guest',
     components:{ErrorField,Nav},
     data(){
         return{
