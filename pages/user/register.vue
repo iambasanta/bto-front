@@ -29,7 +29,7 @@
                     </div>
 
                     <div class="mt-6">
-                        <nuxt-link to="/user/login" class="text-xs font-semibold text-gray-700 hover:text-blue-500">Already registered ?</nuxt-link>
+                        <nuxt-link to="/user/login" class="text-xs font-semibold text-blue-400 hover:text-blue-500">Already registered ?</nuxt-link>
                     </div>
 
                     <div class="mt-6">
