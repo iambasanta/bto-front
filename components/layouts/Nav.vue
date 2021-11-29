@@ -1,17 +1,19 @@
 <template>
     <nav class="flex justify-between items-center">
-        <div>
+        <div class="ml-8">
             <a href="/">
                 <h3 class="text-3xl font-bold">bto</h3>
             </a>
         </div>
         <div>
-            <div v-if="isLoggedIn" class="mr-3">
+            <div v-if="isLoggedIn" class="mr-8">
                 <button class="block h-12 w-12 rounded-full overflow-hidden border-2 border-gray-100" @click="isOpen = ! isOpen">
                     <img class="h-full w-full object-cover" src="~assets/images/avatar.png" alt="">
                 </button>
-                <div v-if="isOpen" class="py-2 absolute bg-gray-100 mt-2 rounded-xl w-18 z-50" >
+                <div v-if="isOpen" class="mr-2 py-2 absolute bg-gray-100 mt-2 rounded-xl w-18 z-50" >
                     <nuxt-link to="/user/profile" class="block text-xs py-2 px-3 font-semibold hover:bg-blue-500 hover:text-white focus:bg-blue-500 focus:text-white uppercase">Profile</nuxt-link>
+                    <nuxt-link to="/user/tickets" class="block text-xs py-2 px-3 font-semibold hover:bg-blue-500 hover:text-white focus:bg-blue-500 focus:text-white uppercase">Tickets</nuxt-link>
+                    <nuxt-link to="/user/payments" class="block text-xs py-2 px-3 font-semibold hover:bg-blue-500 hover:text-white focus:bg-blue-500 focus:text-white uppercase">Payments</nuxt-link>
                     <a class="block text-left px-3 text-xs hover:bg-blue-500 hover:text-white focus:bg-blue-500 focus:text-white uppercase" href="" @click.prevent="logout">
                         logout
                     </a>
