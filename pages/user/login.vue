@@ -58,7 +58,11 @@ export default {
                     this.$axios.defaults.headers.common.authorization = `Bearer ${res.access_token}`
                     this.$axios.$get('user/profile').then((res)=>{
                         this.$store.commit('setLogin',res.data)
-                        this.$router.push('/')
+                        if(this.$route.query.redirect){
+                            this.$router.push(this.$route.query.redirect)
+                        }else{
+                            this.$router.push('/')
+                        }
                     })
                 })
                 .catch((e) => (this.errors = e.response.data.errors))

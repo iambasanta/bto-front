@@ -98,9 +98,10 @@
                         </div>
 
                         <footer class=" flex justify-between items-center mt-8">
-                            <div >
-                                <a href="#" class="bg-blue-500 ml-3 rounded-full text-xs font-semibold text-white uppercase py-2 px-3">Buy Now</a>
+                            <div>
+                                <button class="bg-blue-500 ml-3 rounded-full text-xs font-semibold text-white uppercase py-2 px-3" @click="openPaymentModal">Buy Now</button>
                             </div>
+                            <Pay v-if="isPayOpen" :amount="event.ticket_price" :eventSlug="event.slug" @close="isPayOpen=false"/>
                             <div class="flex justify-between">
                                 <div v-if="isAdmin" class="text-green-500 cursor-pointer" @click="editEvent">
                                     <svg
@@ -144,15 +145,29 @@
 
 <script>
 import Nav from '~/components/layouts/Nav'
+import Pay from '~/components/payment/Pay'
 export default {
-    components:{Nav},
+    components:{Nav,Pay},
     async asyncData({$axios,params}){
         const {data} = await $axios.$get(`event/${params.show}`)   
         return {event:data}
-    } ,
+    },
+    data(){
+        return{
+            isPayOpen:false
+        }
+    },
+    head(){
+        return {
+            script:[{src:"https://js.stripe.com/v3/"}]
+        }
+    },
     computed:{
         isAdmin(){
             return this.$store.state.user.is_admin
+        },
+        isLoggedIn(){
+            return this.$store.state.isLoggedIn
         }
     },
     methods:{
@@ -162,6 +177,12 @@ export default {
         deleteEvent(){
             this.$axios.$delete(`/event/${this.$route.params.show}`)
             this.$router.push('/event/all')
+        },
+        openPaymentModal(){
+            if(!this.isLoggedIn) {
+                this.$router.push(`/user/login?redirect=${this.$route.fullPath}`)
+            }
+            this.isPayOpen = true
         }
     }
 }
